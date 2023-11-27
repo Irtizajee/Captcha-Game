@@ -54,13 +54,7 @@ body{
     /* margin: 20px 30px; */
     /* margin-left: 20px; */
 }
-.captcha_box .images_div:first-child img{
-    /* border: 1px solid green; */
-    /* border-radius: 30px; */
-    /* margin: 10px; */
-    /* width: 90%; */
-    /* height: 90%; */
-}
+
 .images_div_parent{
     width: 100%;
     height: auto;
