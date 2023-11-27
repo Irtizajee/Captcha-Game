@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="captcha_box">
+        <div class="captcha_heading">
+            <div>
+                <p>Select all the square with</p>
+                <h2>HTML boxes</h2>
+                <p>If there are none click skip</p>
+            </div>
+            <div style="width: 100px; height: 70px;">
+                <img width="140px" height="100%" src="p1.png"  alt="">
+            </div>
+        </div>
+        <div class="images_div_parent">
+            <div class="images_div">
+                <div><img id="4" src="p3.png" height="100%" width="100%" alt=""></div>
+                <div><img id="1" src="p1.png" height="100%" width="100%" alt=""></div>
+                <div><img id="5" src="p2.png" height="100%" width="100%" alt=""></div>
+
+            </div>
+            <div class="images_div">
+                <div><img id="2" src="p1.png" height="100%" width="100%" alt=""></div>
+                <div><img id="6" src="p2.png" height="100%" width="100%" alt=""></div>
+                <div><img id="7" src="p3.png" height="100%" width="100%" alt=""></div>
+
+            </div>
+            <div class="images_div">
+                <div><img id="8" src="p3.png" height="100%" width="100%" alt=""></div>
+                <div><img id="3" src="p1.png" height="100%" width="100%" alt=""></div>
+                <div><img id="9" src="p2.png" height="100%" width="100%" alt=""></div>
+
+            </div>
+
+        </div>
+        <div class="result_captcha_div">
+            <div class="result">
+                <h1>HI</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn_div">
+        <button onclick="idPrint()">check</button>
+        <button id="tryAgain">Try Again</button>
+        <button> <a href="/index.html">refresh</a></button>
+    </div>
+    <script>
+        let result = document.querySelector(".result h1");
+        let tryAgain = document.getElementById("tryAgain");
+        let result_captcha_div = document.querySelector(".result_captcha_div");
+        tryAgain.onclick = function () {
+            result_captcha_div.style.display = "none"
+        }
+        let img = document.querySelectorAll("img");
+        // console.log(img[2])
+        let array = new Array;
+        for (const onePic of img) {
+            onePic.onclick = function go(e) {
+                // console.log(typeof e.target.parentElement.children[0].height);
+                // e.target.parentElement.children[0].style.height = "90%"
+                // console.log(e.target.parentElement.children[0].height , "new")
+                if (e.target.parentElement.children[0].height == 100) {
+                    e.target.parentElement.children[0].style.width = "70%"
+                    e.target.parentElement.children[0].style.height = "70%"
+                    e.target.parentElement.children[0].style.border = "3px solid green"
+                    e.target.parentElement.children[0].style.backgroundColor = " green"
+                    array[array.length] = e.target.parentElement.children[0].id
+                }
+                else {
+                    e.target.parentElement.children[0].style.width = "100%"
+                    e.target.parentElement.children[0].style.height = "100%"
+                    e.target.parentElement.children[0].style.border = "3px solid grey"
+                    e.target.parentElement.children[0].style.backgroundColor = " black"
+                    // e.target.parentElement.children[0].style.borderRadius = "0%"
+                    //    console.log(e.target.parentElement.children[0].id)
+                    //    console.log(array.includes(e.target.parentElement.children[0].id))
+                    for (let i = 0; i < array.length; i++) {
+                        if (array[i] == e.target.parentElement.children[0].id) {
+                            array.splice(i, 1)
+                        }
+
+                    }
+                    //    console.log(array)
+                }
+
+                //    e.target.parentElement.children[0].id
+            }
+        }
+        function idPrint() {
+            // console.log(array)
+            let saveIndexArray = []
+            let resultCaptcha;
+            for (let i = 0; i < array.length; i++) {
+                if (array[i] == 1 || array[i] == 2 || array[i] == 3) {
+
+                    // console.log("you select wrong one")
+                    saveIndexArray[saveIndexArray.length] = array[i]
+
+
+                }
+                else {
+                    resultCaptcha = "you select wrong one"
+                    setTimeout(() => {
+                        result.innerHTML = resultCaptcha;
+                        result_captcha_div.style.display = "block"
+                        console.log(resultCaptcha)
+
+                    }, 2000);
+                    return
+                }
+
+
+            }
+            // console.log(saveIndexArray)
+
+            setTimeout(() => {
+                saveIndexArray.length == 3 ? resultCaptcha = "okay you passed" : resultCaptcha = "You missed some box";
+                result.innerHTML = resultCaptcha;
+                result_captcha_div.style.display = "block"
+                console.log(resultCaptcha)
+            }, 2000);
+
+
+        }
+        // img.onclick = go;
+        // function go(){
+        //     console.log("irtaza")
+        // }
+    </script>
+</body>
+
+</html>
